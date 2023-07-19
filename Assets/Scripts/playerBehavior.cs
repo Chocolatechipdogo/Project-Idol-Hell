@@ -2,28 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerBehavior : MonoBehaviour
+public class PlayerBehavior : MonoBehaviour
 {
-    public KeyCode buttonUp;
-    public KeyCode buttonDown;
-    public KeyCode buttonLeft;
-    public KeyCode buttonRight;
 
+    public float speed = 5f;
+    public float jumpForce = 5f;
+    private bool isJumping = false;
+    private bool isGrounded = false;
+    private Rigidbody2D rb;
 
-    //public bool continueMovement;
-
-    // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        float moveInput = Input.GetAxisRaw("Horizontal");
+        rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
 
+        if (Input.GetButtonDown("Jump") && isGrounded)
+        {
+            Debug.Log("NOT");
+            rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+            isJumping = true;
+            isGrounded = false;
+        }
+    }
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isJumping = false;
+            isGrounded = true;
+        }
+    }
 
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false;
+        }
     }
 }
