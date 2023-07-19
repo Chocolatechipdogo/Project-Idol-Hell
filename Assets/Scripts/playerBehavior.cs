@@ -10,6 +10,8 @@ public class playerBehavior : MonoBehaviour
     public KeyCode buttonRight;
 
 
+    //public bool continueMovement;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,5 +22,8 @@ public class playerBehavior : MonoBehaviour
     void Update()
     {
         
+
+
+
     }
 }
