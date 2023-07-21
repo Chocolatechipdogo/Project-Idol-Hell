@@ -11,6 +11,9 @@ public class PlayerBehavior : MonoBehaviour
     private bool isGrounded = false;
     private Rigidbody2D rb;
 
+
+    public bool sidecrollingMode;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -18,9 +21,17 @@ public class PlayerBehavior : MonoBehaviour
 
     void Update()
     {
-        float moveInput = Input.GetAxisRaw("Horizontal");
-        float otherMoveInput = Input.GetAxisRaw("Vertical");
-        rb.velocity = new Vector2(moveInput * speed, otherMoveInput * speed);
+        if (!sidecrollingMode)
+        {
+            float moveInput = Input.GetAxisRaw("Horizontal");
+            float otherMoveInput = Input.GetAxisRaw("Vertical");
+            rb.velocity = new Vector2(moveInput * speed, otherMoveInput * speed);
+        }
+        else
+        {
+            float moveInput = Input.GetAxisRaw("Horizontal");
+            rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
+        }
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
