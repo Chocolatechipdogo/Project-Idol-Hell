@@ -14,6 +14,10 @@ public class PlayerBehavior : MonoBehaviour
 
     public bool sidecrollingMode;
 
+    public int playerHealth;
+
+    
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
