@@ -484,7 +484,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1949111713}
-  - component: {fileID: 1949111717}
   - component: {fileID: 1949111716}
   - component: {fileID: 1949111715}
   - component: {fileID: 1949111714}
@@ -522,6 +521,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff310c561590dae42a63a1e1fbe83f7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numberOfCollums: 10
+  bulletSpeed: 5
+  texture: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  color: {r: 1, g: 0, b: 0, a: 0}
+  lifetime: 5
+  fireRate: 0.5
+  bulletSize: 1
+  material: {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
   pS: {fileID: 1949111716}
   particleHolder: {fileID: 1949111712}
 --- !u!199 &1949111715
@@ -1227,7 +1234,7 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 4
+    type: 19
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
@@ -1298,7 +1305,7 @@ ParticleSystem:
     m_Mesh: {fileID: 0}
     m_MeshRenderer: {fileID: 0}
     m_SkinnedMeshRenderer: {fileID: 0}
-    m_Sprite: {fileID: 0}
+    m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
     m_SpriteRenderer: {fileID: 0}
     m_UseMeshMaterialIndex: 0
     m_UseMeshColors: 1
@@ -1931,7 +1938,7 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 0
+    enabled: 1
     mode: 0
     timeMode: 0
     fps: 30
@@ -5320,20 +5327,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!114 &1949111717
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1949111712}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff310c561590dae42a63a1e1fbe83f7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pS: {fileID: 0}
-  particleHolder: {fileID: 0}
 --- !u!1001 &1791856198212379580
 PrefabInstance:
   m_ObjectHideFlags: 0
