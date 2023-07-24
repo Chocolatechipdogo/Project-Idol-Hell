@@ -20,8 +20,7 @@ public class ParticleScriptFirstEnemy : MonoBehaviour
     
     public ParticleSystem pS;
 
-    public GameObject particleHolder;
-
+    
 
     void Awake()
     {
@@ -35,31 +34,39 @@ public class ParticleScriptFirstEnemy : MonoBehaviour
 
         for (int i = 0; i < numberOfCollums; i++)
         {
-            Material particleMaterial = new Material(Shader.Find("Particles/Standard Unlit"));
+            Material particleMaterial = material;
 
-            particleHolder.transform.Rotate(angle * i, 90, 0);
-            pS = particleHolder.GetComponent<ParticleSystem>();
-            particleHolder.GetComponent<ParticleSystemRenderer>().material = particleMaterial;
+            var go = new GameObject("Particle System");
+            go.transform.Rotate(angle * i, 90, 0); // Rotate so the system emits upwards.
+            go.transform.parent = this.transform;
+            go.transform.position = this.transform.position;
+            pS = go.AddComponent<ParticleSystem>();
+            go.GetComponent<ParticleSystemRenderer>().material = particleMaterial;
 
-            particleHolder.transform.parent = this.transform;
-            particleHolder.transform.position = this.transform.position;
+
             var mainModule = pS.main;
 
             mainModule.startColor = Color.green;
             mainModule.startSize = 0.5f;
+            mainModule.startSpeed = bulletSpeed;
 
             var emission = pS.emission;
             emission.enabled = false;
 
-            var forma = pS.shape;
-            forma.enabled = true;
-            forma.shapeType = ParticleSystemShapeType.Sprite;
-            forma.sprite = null;
+            var form = pS.shape;
+            form.enabled = true;
+            form.shapeType = ParticleSystemShapeType.Sprite;
+            form.sprite = null;
+
+            var text = pS.textureSheetAnimation;
+            text.enabled = true;
+            text.mode = ParticleSystemAnimationMode.Sprites;
+            text.AddSprite(texture);
 
         }
 
         // Every 2 secs we will emit.
-        InvokeRepeating("DoEmit", 2.0f, 2.0f);
+        InvokeRepeating("DoEmit", 0f, fireRate);
     }
 
     void DoEmit()
@@ -71,8 +78,9 @@ public class ParticleScriptFirstEnemy : MonoBehaviour
             // Any parameters we assign in emitParams will override the current system's when we call Emit.
             // Here we will override the start color and size
             var emitParams = new ParticleSystem.EmitParams();
-            emitParams.startColor = Color.red;
-            emitParams.startSize = 0.2f;
+            emitParams.startColor = color;
+            emitParams.startSize = bulletSize;
+            emitParams.startLifetime = lifetime;
             pS.Emit(emitParams, 10);
         }
     }
