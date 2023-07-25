@@ -62,4 +62,15 @@ public class PlayerBehavior : MonoBehaviour
             isGrounded = false;
         }
     }
+
+    void OnParticleCollision(GameObject other)
+    {
+        // Debug.Log(other.name);
+        // ParticleSystemCollision.LifetimeLoss = 1;
+        var pS = other.GetComponent<ParticleSystem>();
+        //int numCollisionEvents = pS.GetCollisionEvents(other, collisionEvents);
+        var collision = pS.collision;
+        collision.lifetimeLoss = 1; 
+       
+    }
 }

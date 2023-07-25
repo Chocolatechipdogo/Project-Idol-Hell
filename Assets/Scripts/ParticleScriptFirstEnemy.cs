@@ -63,6 +63,12 @@ public class ParticleScriptFirstEnemy : MonoBehaviour
             text.mode = ParticleSystemAnimationMode.Sprites;
             text.AddSprite(texture);
 
+            var collision = pS.collision;
+            collision.enabled = true;
+            collision.type = ParticleSystemCollisionType.World;
+            collision.mode = ParticleSystemCollisionMode.Collision2D;
+            collision.sendCollisionMessages = true;
+
         }
 
         // Every 2 secs we will emit.
@@ -84,4 +90,9 @@ public class ParticleScriptFirstEnemy : MonoBehaviour
             pS.Emit(emitParams, 10);
         }
     }
+
+    //void OnParticleCollision(GameObject other)
+    //{
+    //    Debug.Log("Hit");
+    //}
 }
