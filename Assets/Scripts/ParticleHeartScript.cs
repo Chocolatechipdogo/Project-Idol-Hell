@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ParticleScriptFirstEnemy : MonoBehaviour
+public class ParticleHeartScript : MonoBehaviour
 {
-
     public int numberOfCollums;
     public float bulletSpeed;
     public Sprite texture;
@@ -14,13 +13,15 @@ public class ParticleScriptFirstEnemy : MonoBehaviour
     public float bulletSize;
     private float angle;
     public Material material;
-    
-    
-    
-    
+
+
+
+
     public ParticleSystem pS;
 
-    public bool heartShape;
+
+    public bool HeartShape;
+
 
     void Awake()
     {
@@ -48,63 +49,14 @@ public class ParticleScriptFirstEnemy : MonoBehaviour
 
             mainModule.startColor = Color.green;
             mainModule.startSize = 0.5f;
-
-            var currentAngle = angle * i;
-            
-
-            if (heartShape) 
-            {
-                if (currentAngle == 90)   //  || i == 8 || i == 10
-                {
-                    mainModule.startSpeed = bulletSpeed + 1;
-                }
-                else if (currentAngle > 180 && currentAngle < 270)
-                {
-                    if (currentAngle > 225)
-                    {
-                        mainModule.startSpeed = bulletSpeed + 3;
-                    }
-                    else
-                    {
-                        mainModule.startSpeed = bulletSpeed + 2;
-                    }
-                }
-                else if (currentAngle > 270 && currentAngle < 360)
-                {
-                    if (currentAngle < 315)
-                    {
-                        mainModule.startSpeed = bulletSpeed + 3;
-                    }
-                    else
-                    {
-                        mainModule.startSpeed = bulletSpeed + 2;
-                    }
-                }
-                //
-                //else if (currentAngle > 135)
-                //{
-                //    mainModule.startSpeed = bulletSpeed + 1;
-                //}
-                //else if (currentAngle < 45) 
-                //{
-                //    mainModule.startSpeed = bulletSpeed + 1;
-                //}
-                //
-                else if (currentAngle == 0 || currentAngle == 180)
-                {
-                    mainModule.startSpeed = bulletSpeed + 2;
-                }
-                else
-                {
-                    mainModule.startSpeed = bulletSpeed;
-                }
-            }
-            else
+            if (!HeartShape)
             {
                 mainModule.startSpeed = bulletSpeed;
             }
-
-
+            else if (i % 2 == 0) 
+            {
+               mainModule.startSpeed = bulletSpeed * 2;
+            }
             var emission = pS.emission;
             emission.enabled = false;
 
@@ -133,7 +85,7 @@ public class ParticleScriptFirstEnemy : MonoBehaviour
     void DoEmit()
     {
 
-        foreach (Transform child in transform) 
+        foreach (Transform child in transform)
         {
             pS = child.GetComponent<ParticleSystem>();
             // Any parameters we assign in emitParams will override the current system's when we call Emit.
@@ -145,9 +97,4 @@ public class ParticleScriptFirstEnemy : MonoBehaviour
             pS.Emit(emitParams, 10);
         }
     }
-
-    //void OnParticleCollision(GameObject other)
-    //{
-    //    Debug.Log("Hit");
-    //}
 }
