@@ -54,49 +54,77 @@ public class ParticleScriptFirstEnemy : MonoBehaviour
 
             if (heartShape) 
             {
+                // bottom center of hear should be the longest one out
                 if (currentAngle == 90)   //  || i == 8 || i == 10
                 {
-                    mainModule.startSpeed = bulletSpeed + 1;
+                    mainModule.startSpeed = bulletSpeed + 1.25f;
                 }
+                //selecting the secounf quadrant
                 else if (currentAngle > 180 && currentAngle < 270)
                 {
-                    if (currentAngle > 225)
+                    // if its above 30 degree or less then the 60 degree eqivilant it will smooth to 2.5
+                    if (currentAngle > 210 && currentAngle < 240)
                     {
-                        mainModule.startSpeed = bulletSpeed + 3;
+                        mainModule.startSpeed = bulletSpeed + 2.5f;
                     }
+                    // if there are lower angles that exist or higher angles make them transition smoothly from the transition 2 to the 1
+                    else if (currentAngle < 210 || currentAngle > 240)
+                    {
+                        mainModule.startSpeed = bulletSpeed + 1.25f;
+                    }
+                    // any angle that is out side those will default to this aka fail safe (no issue)
                     else
                     {
-                        mainModule.startSpeed = bulletSpeed + 2;
+                        mainModule.startSpeed = bulletSpeed + 10;
                     }
                 }
-                else if (currentAngle > 270 && currentAngle < 360)
-                {
-                    if (currentAngle < 315)
-                    {
-                        mainModule.startSpeed = bulletSpeed + 3;
-                    }
-                    else
-                    {
-                        mainModule.startSpeed = bulletSpeed + 2;
-                    }
-                }
-                //
-                //else if (currentAngle > 135)
-                //{
-                //    mainModule.startSpeed = bulletSpeed + 1;
-                //}
-                //else if (currentAngle < 45) 
-                //{
-                //    mainModule.startSpeed = bulletSpeed + 1;
-                //}
-                //
-                else if (currentAngle == 0 || currentAngle == 180)
-                {
-                    mainModule.startSpeed = bulletSpeed + 2;
-                }
-                else
+                //the top center part of the heart that doesn't need to go that fast so make sure it go default speed
+                else if (currentAngle == 270)
                 {
                     mainModule.startSpeed = bulletSpeed;
+                }
+                // selecting first quadrant
+                else if (currentAngle > 270 && currentAngle < 360)
+                {
+                    // if its above 30 degree or less then the 60 degree eqivilant it will smooth to 2.5 
+                    if (currentAngle > 300  && currentAngle < 330)
+                    {
+                        mainModule.startSpeed = bulletSpeed + 2.5f;
+                    }
+                    //if there are lower angles that exist or higher angles make them transition smoothly from the transition 2 to the 1
+                    else if (currentAngle < 300 || currentAngle > 330)
+                    {
+                        mainModule.startSpeed = bulletSpeed + 1.25f;
+                    }
+                    // any angle that is out side those will default to this aka fail safe
+                    else
+                    {
+                        mainModule.startSpeed = bulletSpeed + 2;
+                    }
+                }
+                // if there the exact middle area of the heart expand a bit to give the final curve before doing a rounded triangle
+                else if (currentAngle == 0 || currentAngle == 180)
+                {
+                    mainModule.startSpeed = bulletSpeed + 1.5f;
+                }
+                //all the angles in quadrant 4 
+                else if (currentAngle < 90)
+                {
+                  mainModule.startSpeed = bulletSpeed + 0.9f;
+                }
+                // all the angles in quadrant 3
+                else if (currentAngle > 90 && currentAngle < 180) 
+                {
+                  mainModule.startSpeed = bulletSpeed + 0.9f;
+                } 
+               //else if (currentAngle > 90 && currentAngle < 150)
+               //{
+               //  mainModule.startSpeed = bulletSpeed + 0.9f;
+               //}
+               //any angles that don't get a value get default
+                else
+                {
+                    mainModule.startSpeed = bulletSpeed + 10;
                 }
             }
             else
