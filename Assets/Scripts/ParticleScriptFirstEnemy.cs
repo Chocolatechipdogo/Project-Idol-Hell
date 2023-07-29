@@ -50,6 +50,7 @@ public class ParticleScriptFirstEnemy : MonoBehaviour
             mainModule.startSize = 0.5f;
 
             var currentAngle = angle * i;
+           // Debug.Log("The Current angle " + currentAngle);
             
 
             if (heartShape) 
@@ -67,12 +68,16 @@ public class ParticleScriptFirstEnemy : MonoBehaviour
                     {
                         mainModule.startSpeed = bulletSpeed + 2.5f;
                     }
+                    else if(currentAngle <= 210)
+                    {
+                        mainModule.startSpeed = bulletSpeed + 2f;
+                    }
                     // if there are lower angles that exist or higher angles make them transition smoothly from the transition 2 to the 1
-                    else if (currentAngle < 210 || currentAngle > 240)
+                    else if (currentAngle >= 240)
                     {
                         mainModule.startSpeed = bulletSpeed + 1.25f;
                     }
-                    // any angle that is out side those will default to this aka fail safe (no issue)
+                    // any angle that is out side those will default to this aka fail safe (no issue) (THIS HAD A CHANGE W/ base 12 meaning the angles aren't acess look into this )
                     else
                     {
                         mainModule.startSpeed = bulletSpeed + 10;
@@ -91,8 +96,12 @@ public class ParticleScriptFirstEnemy : MonoBehaviour
                     {
                         mainModule.startSpeed = bulletSpeed + 2.5f;
                     }
+                    else if (currentAngle >= 330)
+                    {
+                        mainModule.startSpeed = bulletSpeed + 2f;
+                    }
                     //if there are lower angles that exist or higher angles make them transition smoothly from the transition 2 to the 1
-                    else if (currentAngle < 300 || currentAngle > 330)
+                    else if (currentAngle <= 300)
                     {
                         mainModule.startSpeed = bulletSpeed + 1.25f;
                     }
